@@ -1,6 +1,6 @@
 package com.tech_it_easy.TechItEasy.controllers;
 
-import com.tech_it_easy.TechItEasy.exceptions.TelevisionNotFoundException;
+import com.tech_it_easy.TechItEasy.exception.exceptions.ProductNotFoundException;
 import com.tech_it_easy.TechItEasy.models.Television;
 import jakarta.annotation.PostConstruct;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class TelevisionController {
         return televisionDatabase.stream()
                 .filter(tv -> tv.id.equals(id))
                 .findFirst()
-                .orElseThrow(TelevisionNotFoundException::new);
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,7 +39,7 @@ public class TelevisionController {
     @PutMapping("/{id}")
     public void update(@PathVariable Integer id, @RequestBody Television television) {
         if (televisionDatabase.stream().noneMatch(tv -> tv.id.equals(id))) {
-            throw new TelevisionNotFoundException();
+            throw new ProductNotFoundException(id);
         }
         televisionDatabase.add(id, television);
     }
@@ -48,7 +48,7 @@ public class TelevisionController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         if (televisionDatabase.stream().noneMatch(tv -> tv.id.equals(id))) {
-            throw new TelevisionNotFoundException();
+            throw new ProductNotFoundException(id);
         }
         televisionDatabase.remove((int) id);
     }
