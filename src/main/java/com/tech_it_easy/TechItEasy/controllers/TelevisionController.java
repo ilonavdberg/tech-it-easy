@@ -3,9 +3,11 @@ package com.tech_it_easy.TechItEasy.controllers;
 import com.tech_it_easy.TechItEasy.exception.exceptions.ProductNotFoundException;
 import com.tech_it_easy.TechItEasy.models.Television;
 import com.tech_it_easy.TechItEasy.repositories.TelevisionRepository;
-import jakarta.annotation.PostConstruct;
+
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -31,13 +33,13 @@ public class TelevisionController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Television television) {
+    public void create(@Valid @RequestBody Television television) {
         televisionRepository.save(television);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody Television updatedTelevision) {
+    public void update(@PathVariable Long id, @Valid @RequestBody Television updatedTelevision) {
         Television existingTelevision = televisionRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
 
         existingTelevision.setType(updatedTelevision.getType());
@@ -66,13 +68,5 @@ public class TelevisionController {
         televisionRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         televisionRepository.deleteById(id);
     }
-
-    // add two tv's to the database on start-up (for testing purposes)
-//    @PostConstruct
-//    private void init() {
-//        Television tv1 = new Television("LG Oled 4K");
-//        Television tv2 = new Television("Samsung Qled 8k");
-//        televisionRepository.saveAll(List.of(tv1, tv2));
-//    }
 
 }

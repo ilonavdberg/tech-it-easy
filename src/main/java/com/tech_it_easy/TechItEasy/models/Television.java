@@ -1,6 +1,9 @@
 package com.tech_it_easy.TechItEasy.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name="televisions")
@@ -8,21 +11,37 @@ public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    @NotBlank
     public String type;
+    @NotBlank
     public String brand;
+    @NotBlank
     public String name;
+    @PositiveOrZero
     public Double price;
+    @PositiveOrZero
     public Double availableSize;
+    @PositiveOrZero
     public Integer refreshRate;
+    @NotBlank
     public String screenType;
+    @NotBlank
     public String screenQuality;
+    @NotNull
     public Boolean isSmartTv;
+    @NotNull
     public Boolean hasWifi;
+    @NotNull
     public Boolean hasVoiceControl;
+    @NotNull
     public Boolean hasHdr;
+    @NotNull
     public Boolean hasBluetooth;
+    @NotNull
     public Boolean hasAmbiLight;
+    @PositiveOrZero
     public Integer originalStock;
+    @PositiveOrZero
     public Integer sold;
 
 
