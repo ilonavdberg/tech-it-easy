@@ -47,6 +47,10 @@ public class Television {
 
     public Television() {}
 
+    public Long getId() {
+        return id;
+    }
+
     public String getType() {
         return type;
     }
