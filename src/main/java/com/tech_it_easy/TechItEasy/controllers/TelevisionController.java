@@ -2,6 +2,7 @@ package com.tech_it_easy.TechItEasy.controllers;
 
 import com.tech_it_easy.TechItEasy.dtos.TelevisionRequestDto;
 import com.tech_it_easy.TechItEasy.dtos.TelevisionResponseDto;
+import com.tech_it_easy.TechItEasy.dtos.TelevisionSalesInfoResponseDTO;
 import com.tech_it_easy.TechItEasy.mappers.TelevisionMapper;
 import com.tech_it_easy.TechItEasy.models.Television;
 import com.tech_it_easy.TechItEasy.services.TelevisionService;
@@ -33,6 +34,12 @@ public class TelevisionController {
     public TelevisionResponseDto getTelevision(@PathVariable Long id) {
         Television television = televisionService.getTelevision(id);
         return TelevisionMapper.toTelevisionDto(television);
+    }
+
+    @GetMapping("/sales-info")
+    public List<TelevisionSalesInfoResponseDTO> getAllTelevisionsSalesInfo() {
+        List<Television> televisions = televisionService.getAllTelevisions();
+        return TelevisionMapper.toTelevisionSalesInfoDtoList(televisions);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
