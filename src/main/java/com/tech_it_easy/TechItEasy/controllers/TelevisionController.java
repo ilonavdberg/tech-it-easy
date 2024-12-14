@@ -10,6 +10,7 @@ import com.tech_it_easy.TechItEasy.services.TelevisionService;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,41 +26,46 @@ public class TelevisionController {
     }
 
     @GetMapping("")
-    public List<TelevisionResponseDto> getAllTelevisions() {
+    public ResponseEntity<List<TelevisionResponseDto>> getAllTelevisions() {
         List<Television> televisions = televisionService.getAllTelevisions();
-        return TelevisionMapper.toTelevisionDtoList(televisions);
+        List<TelevisionResponseDto> response = TelevisionMapper.toTelevisionDtoList(televisions);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public TelevisionResponseDto getTelevision(@PathVariable Long id) {
+    public ResponseEntity<TelevisionResponseDto> getTelevision(@PathVariable Long id) {
         Television television = televisionService.getTelevision(id);
-        return TelevisionMapper.toTelevisionDto(television);
+        TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(television);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/sales-info")
-    public List<TelevisionSalesInfoResponseDTO> getAllTelevisionsSalesInfo() {
+    public ResponseEntity<List<TelevisionSalesInfoResponseDTO>> getAllTelevisionsSalesInfo() {
         List<Television> televisions = televisionService.getAllTelevisions();
-        return TelevisionMapper.toTelevisionSalesInfoDtoList(televisions);
+        List<TelevisionSalesInfoResponseDTO> response = TelevisionMapper.toTelevisionSalesInfoDtoList(televisions);
+        return ResponseEntity.ok(response);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void createTelevision(@Valid @RequestBody TelevisionRequestDto request) {
+    public ResponseEntity<TelevisionResponseDto> createTelevision(@Valid @RequestBody TelevisionRequestDto request) {
         Television television = TelevisionMapper.toTelevision(request);
         televisionService.saveTelevision(television);
+        TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(television);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void updateTelevision(@PathVariable Long id, @Valid @RequestBody TelevisionRequestDto request) {
+    public ResponseEntity<TelevisionResponseDto> updateTelevision(@PathVariable Long id, @Valid @RequestBody TelevisionRequestDto request) {
         Television television = TelevisionMapper.toTelevision(request);
         televisionService.updateTelevision(id, television);
+        TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(television);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteTelevision(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTelevision(@PathVariable Long id) {
         televisionService.deleteTelevision(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
