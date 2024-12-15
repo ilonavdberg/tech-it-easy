@@ -7,7 +7,6 @@ import com.tech_it_easy.TechItEasy.models.Television;
 
 import java.util.List;
 
-
 public class TelevisionMapper {
     public static TelevisionResponseDto toTelevisionDto(Television television) {
         return new TelevisionResponseDto(

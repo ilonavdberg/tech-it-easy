@@ -1,6 +1,7 @@
 package com.tech_it_easy.TechItEasy.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
 
 @Entity
 @Table(name = "wall_brackets")
@@ -8,10 +9,22 @@ public class WallBracket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String size;
+
+    @Column(nullable = false)
     private Boolean adjustable;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(precision = 8, scale = 2, nullable = false)
+    @Check(constraints = "price >= 0.00")
     private Double price;
+
+    @Column(precision = 8, nullable = false)
+    @Check(constraints = "originalStock >= 0.00")
     private Integer originalStock;
 
     public WallBracket() {}

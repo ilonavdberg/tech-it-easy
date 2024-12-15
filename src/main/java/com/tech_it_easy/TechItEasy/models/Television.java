@@ -1,9 +1,9 @@
 package com.tech_it_easy.TechItEasy.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import org.hibernate.annotations.Check;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name="televisions")
@@ -11,42 +11,61 @@ public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
-    private String type;
-    @NotBlank
-    private String brand;
-    @NotBlank
-    private String name;
-    @PositiveOrZero
-    private Double price;
-    @PositiveOrZero
-    private Double availableSize;
-    @PositiveOrZero
-    private Integer refreshRate;
-    @NotBlank
-    private String screenType;
-    @NotBlank
-    private String screenQuality;
-    @NotNull
-    private Boolean isSmartTv;
-    @NotNull
-    private Boolean hasWifi;
-    @NotNull
-    private Boolean hasVoiceControl;
-    @NotNull
-    private Boolean hasHdr;
-    @NotNull
-    private Boolean hasBluetooth;
-    @NotNull
-    private Boolean hasAmbiLight;
-    @PositiveOrZero
-    private Integer originalStock;
-    @PositiveOrZero
-    private Integer sold;
 
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(precision = 8, scale = 2, nullable = false)
+    @Check(constraints = "price >= 0.00")
+    private BigDecimal price;
+
+    @Column(precision = 8, scale = 2, nullable = false)
+    private Double availableSize;
+
+    @Column(precision = 4, nullable = false)
+    private Integer refreshRate;
+
+    @Column(nullable = false)
+    private String screenType;
+
+    @Column(nullable = false)
+    private String screenQuality;
+
+    @Column(nullable = false)
+    private Boolean isSmartTv;
+
+    @Column(nullable = false)
+    private Boolean hasWifi;
+
+    @Column(nullable = false)
+    private Boolean hasVoiceControl;
+
+    @Column(nullable = false)
+    private Boolean hasHdr;
+
+    @Column(nullable = false)
+    private Boolean hasBluetooth;
+
+    @Column(nullable = false)
+    private Boolean hasAmbiLight;
+
+    @Column(precision = 8, nullable = false)
+    @Check(constraints = "originalStock >= 0.00")
+    private Integer originalStock;
+
+    @Column(precision = 8, nullable = false)
+    @Check(constraints = "sold >= 0.00")
+    private Integer sold;
 
     public Television() {}
 
+    //Getters and Setters
     public Long getId() {
         return id;
     }
@@ -63,7 +82,7 @@ public class Television {
         return name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -127,7 +146,7 @@ public class Television {
         this.name = name;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
