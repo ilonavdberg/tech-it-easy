@@ -70,6 +70,13 @@ public class TelevisionController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{id}/wall-brackets")
+    public ResponseEntity<TelevisionResponseDto> updateWallBracketsInTelevision(@PathVariable Long id, @RequestBody IdInputDto wallBracket) {
+        televisionService.assignWallBracketToTelevision(id, wallBracket.getId());
+        TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(televisionService.getTelevision(id));
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTelevision(@PathVariable Long id) {
         televisionService.deleteTelevision(id);

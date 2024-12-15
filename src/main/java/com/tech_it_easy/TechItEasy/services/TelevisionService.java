@@ -3,8 +3,11 @@ package com.tech_it_easy.TechItEasy.services;
 import com.tech_it_easy.TechItEasy.exception.exceptions.ProductNotFoundException;
 import com.tech_it_easy.TechItEasy.models.Remote;
 import com.tech_it_easy.TechItEasy.models.Television;
+import com.tech_it_easy.TechItEasy.models.WallBracket;
 import com.tech_it_easy.TechItEasy.repositories.TelevisionRepository;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,10 +15,12 @@ import java.util.List;
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
     private final RemoteService remoteService;
+    private final WallBracketService wallBracketService;
 
-    public TelevisionService(TelevisionRepository televisionRepository, RemoteService remoteService) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteService remoteService, WallBracketService wallBracketService) {
         this.televisionRepository = televisionRepository;
         this.remoteService = remoteService;
+        this.wallBracketService = wallBracketService;
     }
 
     public List<Television> getAllTelevisions() {
@@ -59,11 +64,22 @@ public class TelevisionService {
         televisionRepository.delete(television);
     }
 
+    @Transactional
     public void assignRemoteToTelevision(Long televisionId, Long remoteId) {
         Television television = getTelevision(televisionId);
         Remote remote = remoteService.getRemote(remoteId);
 
         television.setRemote(remote);
+
+        televisionRepository.save(television);
+    }
+
+    @Transactional
+    public void assignWallBracketToTelevision(Long televisionId, Long wallBracketId) {
+        Television television = getTelevision(televisionId);
+        WallBracket wallBracket = wallBracketService.getWallBracket(wallBracketId);
+
+        television.addWallBracket(wallBracket);
 
         televisionRepository.save(television);
     }

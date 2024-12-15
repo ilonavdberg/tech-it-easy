@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "wall_brackets")
@@ -28,6 +29,9 @@ public class WallBracket {
     @Column(name = "original_stock", precision = 8, nullable = false)
     @Check(constraints = "original_stock >= 0.00")
     private Integer originalStock;
+
+    @ManyToMany(mappedBy = "wallbrackets")
+    private List<Television> televisions;
 
     public WallBracket() {}
 

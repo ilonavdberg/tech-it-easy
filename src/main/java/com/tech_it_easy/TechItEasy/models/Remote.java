@@ -32,6 +32,9 @@ public class Remote {
     @Check(constraints = "original_stock >= 0.00")
     private Integer originalStock;
 
+    @OneToOne (mappedBy = "remote")
+    private Television television;
+
     public Remote() {}
 
     //Getters and setters
@@ -63,6 +66,10 @@ public class Remote {
         return originalStock;
     }
 
+    public Television getTelevision() {
+        return television;
+    }
+
     public void setCompatibleWith(String compatibleWith) {
         this.compatibleWith = compatibleWith;
     }
@@ -85,5 +92,9 @@ public class Remote {
 
     public void setOriginalStock(Integer originalStock) {
         this.originalStock = originalStock;
+    }
+
+    public void setTelevision(Television television) {
+        this.television = television;
     }
 }

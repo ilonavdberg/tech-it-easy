@@ -2,8 +2,10 @@ package com.tech_it_easy.TechItEasy.controllers;
 
 import com.tech_it_easy.TechItEasy.dtos.CIModuleRequestDto;
 import com.tech_it_easy.TechItEasy.dtos.CIModuleResponseDto;
+import com.tech_it_easy.TechItEasy.dtos.IdInputDto;
 import com.tech_it_easy.TechItEasy.mappers.CIModuleMapper;
 import com.tech_it_easy.TechItEasy.models.CIModule;
+import com.tech_it_easy.TechItEasy.models.Television;
 import com.tech_it_easy.TechItEasy.services.CIModuleService;
 
 import jakarta.validation.Valid;
@@ -51,6 +53,13 @@ public class CIModuleController {
         ciModuleService.updateCIModule(id, ciModule);
         CIModuleResponseDto response = CIModuleMapper.toCIModuleResponse(ciModule);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+    }
+
+    @PutMapping("/{id}/televisions")
+    public ResponseEntity<CIModuleResponseDto> addTelevisionToCIModule(@PathVariable Long id, @RequestBody IdInputDto television) {
+        ciModuleService.addTelevisionToCIModule(id, television.getId());
+        CIModuleResponseDto response = CIModuleMapper.toCIModuleResponse(ciModuleService.getCIModule(id));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")

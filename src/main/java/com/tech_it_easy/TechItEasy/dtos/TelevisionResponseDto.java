@@ -18,6 +18,7 @@ public record TelevisionResponseDto(
         Boolean hasHdr,
         Boolean hasBluetooth,
         Boolean hasAmbiLight,
-        RemoteResponseDto remoteController
+        RemoteResponseDto remoteResponse,
+        java.util.List<WallBracketResponseDto> wallBracketResponse
 ) {
 }

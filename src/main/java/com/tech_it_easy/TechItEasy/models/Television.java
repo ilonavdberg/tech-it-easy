@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name="televisions")
@@ -63,11 +64,27 @@ public class Television {
     @Check(constraints = "sold >= 0.00")
     private Integer sold;
 
-    @OneToOne(optional = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "remote_controller_id", referencedColumnName = "id")
     private Remote remote;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ci_module_id", referencedColumnName = "id")
+    private CIModule ciModule;
+
+    @ManyToMany
+    @JoinTable(
+            name = "televisions_wallbrackets",
+            joinColumns = @JoinColumn(name = "television_id"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket_id")
+    )
+    private List<WallBracket> wallbrackets;
+
     public Television() {}
+
+    public void addWallBracket(WallBracket wallBracket) {
+        wallbrackets.add(wallBracket);
+    }
 
     //Getters and Setters
     public Long getId() {
@@ -142,6 +159,14 @@ public class Television {
         return remote;
     }
 
+    public List<WallBracket> getWallbrackets() {
+        return wallbrackets;
+    }
+
+    public CIModule getCIModule() {
+        return ciModule;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -208,5 +233,9 @@ public class Television {
 
     public void setRemote(Remote remote) {
         this.remote = remote;
+    }
+
+    public void setCIModule(CIModule ciModule) {
+        this.ciModule = ciModule;
     }
 }
