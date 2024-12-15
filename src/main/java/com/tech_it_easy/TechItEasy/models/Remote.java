@@ -33,7 +33,6 @@ public class Remote {
     public Remote() {}
 
     //Getters and setters
-
     public Long getId() {
         return id;
     }

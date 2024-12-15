@@ -28,7 +28,7 @@ public class RemoteService {
     }
 
     public void updateRemoteController(Long id, Remote updatedRemote) {
-        Remote remote = remoteRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        Remote remote = getRemote(id);
 
         remote.setCompatibleWith(updatedRemote.getCompatibleWith());
         remote.setBatteryType(updatedRemote.getBatteryType());
@@ -37,7 +37,7 @@ public class RemoteService {
         remote.setPrice(updatedRemote.getPrice());
         remote.setOriginalStock(updatedRemote.getOriginalStock());
 
-        remoteRepository.save(remote);
+        saveRemoteController(remote);
     }
 
     public void deleteRemoteController(Long id) {

@@ -28,14 +28,14 @@ public class CIModuleService {
     }
 
     public void updateCIModule(Long id, CIModule updatedCIModule) {
-        CIModule ciModule = ciModuleRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        CIModule ciModule = getCIModule(id);
 
         ciModule.setName(updatedCIModule.getName());
         ciModule.setBrand(updatedCIModule.getBrand());
         ciModule.setPrice(updatedCIModule.getPrice());
         ciModule.setOriginalStock(updatedCIModule.getOriginalStock());
 
-        ciModuleRepository.save(ciModule);
+        saveCIModule(ciModule);
     }
 
     public void deleteCIModule(Long id) {

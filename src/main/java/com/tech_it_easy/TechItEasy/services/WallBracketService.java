@@ -23,7 +23,7 @@ public class WallBracketService {
         return wallBracketRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    public void createWallBracket(WallBracket wallBracket) {
+    public void saveWallBracket(WallBracket wallBracket) {
         wallBracketRepository.save(wallBracket);
     }
 
@@ -37,7 +37,7 @@ public class WallBracketService {
         wallBracket.setPrice(request.getPrice());
         wallBracket.setOriginalStock(request.getOriginalStock());
 
-        wallBracketRepository.save(wallBracket);
+        saveWallBracket(wallBracket);
     }
 
     public void deleteWallBracket(Long id) {

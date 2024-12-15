@@ -30,7 +30,6 @@ public class WallBracket {
     public WallBracket() {}
 
     //Getters and Setters
-
     public Long getId() {
         return id;
     }
