@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.math.BigDecimal;
+
 public class WallBracketRequestDto {
     @NotBlank
     String size;
@@ -12,7 +14,7 @@ public class WallBracketRequestDto {
     @NotBlank
     String name;
     @PositiveOrZero
-    Double price;
+    BigDecimal price;
     @PositiveOrZero
     Integer originalStock;
 
@@ -29,7 +31,7 @@ public class WallBracketRequestDto {
         return name;
     }
 
-    public @PositiveOrZero Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

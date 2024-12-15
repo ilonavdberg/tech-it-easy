@@ -3,6 +3,8 @@ package com.tech_it_easy.TechItEasy.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.math.BigDecimal;
+
 public class RemoteRequestDto {
     @NotBlank
     private String compatibleWith;
@@ -13,7 +15,7 @@ public class RemoteRequestDto {
     @NotBlank
     private String brand;
     @PositiveOrZero
-    private Double price;
+    private BigDecimal price;
     @PositiveOrZero
     private Integer originalStock;
 
@@ -33,7 +35,7 @@ public class RemoteRequestDto {
         return brand;
     }
 
-    public @PositiveOrZero Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

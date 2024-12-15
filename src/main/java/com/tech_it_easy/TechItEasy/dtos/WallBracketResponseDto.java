@@ -5,6 +5,6 @@ public record WallBracketResponseDto(
         String size,
         Boolean adjustable,
         String name,
-        Double price
+        java.math.BigDecimal price
 ) {
 }

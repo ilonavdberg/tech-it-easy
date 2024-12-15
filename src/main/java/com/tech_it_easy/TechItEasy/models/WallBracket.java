@@ -25,8 +25,8 @@ public class WallBracket {
     @Check(constraints = "price >= 0.00")
     private BigDecimal price;
 
-    @Column(precision = 8, nullable = false)
-    @Check(constraints = "originalStock >= 0.00")
+    @Column(name = "original_stock", precision = 8, nullable = false)
+    @Check(constraints = "original_stock >= 0.00")
     private Integer originalStock;
 
     public WallBracket() {}

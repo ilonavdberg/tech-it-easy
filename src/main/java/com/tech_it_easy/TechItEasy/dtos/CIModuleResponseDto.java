@@ -4,6 +4,6 @@ public record CIModuleResponseDto(
         Long id,
         String name,
         String brand,
-        Double price
+        java.math.BigDecimal price
 ) {
 }

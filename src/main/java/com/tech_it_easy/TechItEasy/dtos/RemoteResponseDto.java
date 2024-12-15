@@ -6,6 +6,6 @@ public record RemoteResponseDto(
         String batteryType,
         String name,
         String brand,
-        Double price
+        java.math.BigDecimal price
 ) {
 }

@@ -55,8 +55,8 @@ public class Television {
     @Column(nullable = false)
     private Boolean hasAmbiLight;
 
-    @Column(precision = 8, nullable = false)
-    @Check(constraints = "originalStock >= 0.00")
+    @Column(name = "original_stock", precision = 8, nullable = false)
+    @Check(constraints = "original_stock >= 0.00")
     private Integer originalStock;
 
     @Column(precision = 8, nullable = false)
@@ -64,7 +64,7 @@ public class Television {
     private Integer sold;
 
     @OneToOne
-    @JoinColumn(name = "remote_id", referencedColumnName = "id")
+    @JoinColumn(name = "remote_controller_id", referencedColumnName = "id")
     private Remote remote;
 
     public Television() {}
