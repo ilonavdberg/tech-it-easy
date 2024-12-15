@@ -7,7 +7,6 @@ import com.tech_it_easy.TechItEasy.models.Television;
 
 import java.util.List;
 
-
 public class TelevisionMapper {
     public static TelevisionResponseDto toTelevisionDto(Television television) {
         return new TelevisionResponseDto(
@@ -26,8 +25,8 @@ public class TelevisionMapper {
                 television.getHasHdr(),
                 television.getHasBluetooth(),
                 television.getHasAmbiLight(),
-                television.getOriginalStock(),
-                television.getSold()
+                RemoteMapper.toRemoteDto(television.getRemote()),
+                WallBracketMapper.toWallBracketDtoList(television.getWallbrackets())
         );
     }
 

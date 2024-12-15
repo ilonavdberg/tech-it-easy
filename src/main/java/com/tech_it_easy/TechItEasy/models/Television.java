@@ -1,52 +1,92 @@
 package com.tech_it_easy.TechItEasy.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import org.hibernate.annotations.Check;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name="televisions")
 public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    @NotBlank
-    public String type;
-    @NotBlank
-    public String brand;
-    @NotBlank
-    public String name;
-    @PositiveOrZero
-    public Double price;
-    @PositiveOrZero
-    public Double availableSize;
-    @PositiveOrZero
-    public Integer refreshRate;
-    @NotBlank
-    public String screenType;
-    @NotBlank
-    public String screenQuality;
-    @NotNull
-    public Boolean isSmartTv;
-    @NotNull
-    public Boolean hasWifi;
-    @NotNull
-    public Boolean hasVoiceControl;
-    @NotNull
-    public Boolean hasHdr;
-    @NotNull
-    public Boolean hasBluetooth;
-    @NotNull
-    public Boolean hasAmbiLight;
-    @PositiveOrZero
-    public Integer originalStock;
-    @PositiveOrZero
-    public Integer sold;
+    private Long id;
 
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(precision = 8, scale = 2, nullable = false)
+    @Check(constraints = "price >= 0.00")
+    private BigDecimal price;
+
+    @Column(precision = 8, nullable = false)
+    private Double availableSize;
+
+    @Column(precision = 4, nullable = false)
+    private Integer refreshRate;
+
+    @Column(nullable = false)
+    private String screenType;
+
+    @Column(nullable = false)
+    private String screenQuality;
+
+    @Column(nullable = false)
+    private boolean isSmartTv;
+
+    @Column(nullable = false)
+    private boolean hasWifi;
+
+    @Column(nullable = false)
+    private boolean hasVoiceControl;
+
+    @Column(nullable = false)
+    private boolean hasHdr;
+
+    @Column(nullable = false)
+    private boolean hasBluetooth;
+
+    @Column(nullable = false)
+    private boolean hasAmbiLight;
+
+    @Column(name = "original_stock", precision = 8, nullable = false)
+    @Check(constraints = "original_stock >= 0.00")
+    private Integer originalStock;
+
+    @Column(precision = 8, nullable = false)
+    @Check(constraints = "sold >= 0.00")
+    private Integer sold;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "remote_controller_id", referencedColumnName = "id")
+    private Remote remote;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ci_module_id", referencedColumnName = "id")
+    private CIModule ciModule;
+
+    @ManyToMany
+    @JoinTable(
+            name = "televisions_wallbrackets",
+            joinColumns = @JoinColumn(name = "television_id"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket_id")
+    )
+    private List<WallBracket> wallbrackets;
 
     public Television() {}
 
+    public void addWallBracket(WallBracket wallBracket) {
+        wallbrackets.add(wallBracket);
+    }
+
+    //Getters and Setters
     public Long getId() {
         return id;
     }
@@ -63,7 +103,7 @@ public class Television {
         return name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -115,6 +155,18 @@ public class Television {
         return sold;
     }
 
+    public Remote getRemote() {
+        return remote;
+    }
+
+    public List<WallBracket> getWallbrackets() {
+        return wallbrackets;
+    }
+
+    public CIModule getCIModule() {
+        return ciModule;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -127,7 +179,7 @@ public class Television {
         this.name = name;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -177,5 +229,13 @@ public class Television {
 
     public void setSold(Integer sold) {
         this.sold = sold;
+    }
+
+    public void setRemote(Remote remote) {
+        this.remote = remote;
+    }
+
+    public void setCIModule(CIModule ciModule) {
+        this.ciModule = ciModule;
     }
 }
