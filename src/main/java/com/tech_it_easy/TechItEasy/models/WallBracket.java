@@ -3,29 +3,35 @@ package com.tech_it_easy.TechItEasy.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ci_modules")
-public class CIModule {
+@Table(name = "wall_brackets")
+public class WallBracket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String size;
+    private Boolean adjustable;
     private String name;
-    private String brand;
     private Double price;
     private Integer originalStock;
 
-    public CIModule() {}
+    public WallBracket() {}
 
     //Getters and Setters
+
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getSize() {
+        return size;
     }
 
-    public String getBrand() {
-        return brand;
+    public Boolean getAdjustable() {
+        return adjustable;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Double getPrice() {
@@ -36,12 +42,16 @@ public class CIModule {
         return originalStock;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setAdjustable(Boolean adjustable) {
+        this.adjustable = adjustable;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPrice(Double price) {
