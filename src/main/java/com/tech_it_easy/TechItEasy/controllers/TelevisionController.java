@@ -25,7 +25,7 @@ public class TelevisionController {
         this.televisionService = televisionService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<TelevisionResponseDto>> getAllTelevisions() {
         List<Television> televisions = televisionService.getAllTelevisions();
         List<TelevisionResponseDto> response = TelevisionMapper.toTelevisionDtoList(televisions);
@@ -46,7 +46,7 @@ public class TelevisionController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<TelevisionResponseDto> createTelevision(@Valid @RequestBody TelevisionRequestDto request) {
         Television television = TelevisionMapper.toTelevision(request);
         televisionService.saveTelevision(television);

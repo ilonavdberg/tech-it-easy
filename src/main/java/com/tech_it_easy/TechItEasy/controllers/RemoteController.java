@@ -5,6 +5,9 @@ import com.tech_it_easy.TechItEasy.dtos.RemoteResponseDto;
 import com.tech_it_easy.TechItEasy.mappers.RemoteMapper;
 import com.tech_it_easy.TechItEasy.models.Remote;
 import com.tech_it_easy.TechItEasy.services.RemoteService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +38,7 @@ public class RemoteController {
     }
 
     @PostMapping("")
-    public ResponseEntity<RemoteResponseDto> createRemoteController(@RequestBody RemoteRequestDto request) {
+    public ResponseEntity<RemoteResponseDto> createRemoteController(@Valid @RequestBody RemoteRequestDto request) {
         Remote remote = RemoteMapper.toRemote(request);
         remoteService.saveRemoteController(remote);
         RemoteResponseDto response = RemoteMapper.toRemoteDto(remote);
@@ -43,7 +46,7 @@ public class RemoteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RemoteResponseDto> updateRemoteController(@PathVariable Long id, @RequestBody RemoteRequestDto request) {
+    public ResponseEntity<RemoteResponseDto> updateRemoteController(@PathVariable Long id, @Valid @RequestBody RemoteRequestDto request) {
         Remote remote = RemoteMapper.toRemote(request);
         remoteService.updateRemoteController(id, remote);
         RemoteResponseDto response = RemoteMapper.toRemoteDto(remote);
