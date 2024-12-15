@@ -38,6 +38,7 @@ public class TelevisionRequestDto {
     @PositiveOrZero
     public Integer sold;
 
+    //Getters
     public @NotBlank String getType() {
         return type;
     }
