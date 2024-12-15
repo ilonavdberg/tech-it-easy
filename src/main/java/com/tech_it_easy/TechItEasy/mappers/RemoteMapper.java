@@ -28,7 +28,7 @@ public class RemoteMapper {
         remote.setCompatibleWith(request.getCompatibleWith());
         remote.setBatteryType(request.getBatteryType());
         remote.setName(request.getName());
-        remote.setBrand(remote.getBrand());
+        remote.setBrand(request.getBrand());
         remote.setPrice(request.getPrice());
         remote.setOriginalStock(request.getOriginalStock());
 

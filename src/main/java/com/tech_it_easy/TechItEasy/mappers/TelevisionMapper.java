@@ -24,7 +24,8 @@ public class TelevisionMapper {
                 television.getHasVoiceControl(),
                 television.getHasHdr(),
                 television.getHasBluetooth(),
-                television.getHasAmbiLight()
+                television.getHasAmbiLight(),
+                RemoteMapper.toRemoteDto(television.getRemote())
         );
     }
 

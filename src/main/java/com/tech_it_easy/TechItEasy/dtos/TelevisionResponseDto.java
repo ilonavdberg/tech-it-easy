@@ -1,11 +1,13 @@
 package com.tech_it_easy.TechItEasy.dtos;
 
+import java.math.BigDecimal;
+
 public record TelevisionResponseDto(
         Long id,
         String type,
         String brand,
         String name,
-        java.math.BigDecimal price,
+        BigDecimal price,
         Double availableSize,
         Integer refreshRate,
         String screenType,
@@ -15,6 +17,7 @@ public record TelevisionResponseDto(
         Boolean hasVoiceControl,
         Boolean hasHdr,
         Boolean hasBluetooth,
-        Boolean hasAmbiLight
+        Boolean hasAmbiLight,
+        RemoteResponseDto remoteController
 ) {
 }

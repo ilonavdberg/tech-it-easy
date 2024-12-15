@@ -32,9 +32,6 @@ public class Remote {
     @Check(constraints = "original_stock >= 0.00")
     private Integer originalStock;
 
-    @OneToOne (mappedBy = "remote")
-    private Television television;
-
     public Remote() {}
 
     //Getters and setters

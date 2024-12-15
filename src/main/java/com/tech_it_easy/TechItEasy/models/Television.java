@@ -38,22 +38,22 @@ public class Television {
     private String screenQuality;
 
     @Column(nullable = false)
-    private Boolean isSmartTv;
+    private boolean isSmartTv;
 
     @Column(nullable = false)
-    private Boolean hasWifi;
+    private boolean hasWifi;
 
     @Column(nullable = false)
-    private Boolean hasVoiceControl;
+    private boolean hasVoiceControl;
 
     @Column(nullable = false)
-    private Boolean hasHdr;
+    private boolean hasHdr;
 
     @Column(nullable = false)
-    private Boolean hasBluetooth;
+    private boolean hasBluetooth;
 
     @Column(nullable = false)
-    private Boolean hasAmbiLight;
+    private boolean hasAmbiLight;
 
     @Column(name = "original_stock", precision = 8, nullable = false)
     @Check(constraints = "original_stock >= 0.00")
@@ -63,7 +63,7 @@ public class Television {
     @Check(constraints = "sold >= 0.00")
     private Integer sold;
 
-    @OneToOne
+    @OneToOne(optional = true)
     @JoinColumn(name = "remote_controller_id", referencedColumnName = "id")
     private Remote remote;
 
@@ -138,6 +138,10 @@ public class Television {
         return sold;
     }
 
+    public Remote getRemote() {
+        return remote;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -200,5 +204,9 @@ public class Television {
 
     public void setSold(Integer sold) {
         this.sold = sold;
+    }
+
+    public void setRemote(Remote remote) {
+        this.remote = remote;
     }
 }

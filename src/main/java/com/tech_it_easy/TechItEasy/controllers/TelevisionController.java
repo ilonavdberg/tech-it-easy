@@ -1,5 +1,6 @@
 package com.tech_it_easy.TechItEasy.controllers;
 
+import com.tech_it_easy.TechItEasy.dtos.IdInputDto;
 import com.tech_it_easy.TechItEasy.dtos.TelevisionRequestDto;
 import com.tech_it_easy.TechItEasy.dtos.TelevisionResponseDto;
 import com.tech_it_easy.TechItEasy.dtos.TelevisionSalesInfoResponseDTO;
@@ -59,7 +60,14 @@ public class TelevisionController {
         Television television = TelevisionMapper.toTelevision(request);
         televisionService.updateTelevision(id, television);
         TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(television);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/remotecontroller")
+    public ResponseEntity<TelevisionResponseDto> updateRemoteInTelevision(@PathVariable Long id, @RequestBody IdInputDto remote) {
+        televisionService.assignRemoteToTelevision(id, remote.getId());
+        TelevisionResponseDto response = TelevisionMapper.toTelevisionDto(televisionService.getTelevision(id));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
