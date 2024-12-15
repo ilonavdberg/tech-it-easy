@@ -10,39 +10,39 @@ import jakarta.validation.constraints.PositiveOrZero;
 public class Television {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
     @NotBlank
-    public String type;
+    private String type;
     @NotBlank
-    public String brand;
+    private String brand;
     @NotBlank
-    public String name;
+    private String name;
     @PositiveOrZero
-    public Double price;
+    private Double price;
     @PositiveOrZero
-    public Double availableSize;
+    private Double availableSize;
     @PositiveOrZero
-    public Integer refreshRate;
+    private Integer refreshRate;
     @NotBlank
-    public String screenType;
+    private String screenType;
     @NotBlank
-    public String screenQuality;
+    private String screenQuality;
     @NotNull
-    public Boolean isSmartTv;
+    private Boolean isSmartTv;
     @NotNull
-    public Boolean hasWifi;
+    private Boolean hasWifi;
     @NotNull
-    public Boolean hasVoiceControl;
+    private Boolean hasVoiceControl;
     @NotNull
-    public Boolean hasHdr;
+    private Boolean hasHdr;
     @NotNull
-    public Boolean hasBluetooth;
+    private Boolean hasBluetooth;
     @NotNull
-    public Boolean hasAmbiLight;
+    private Boolean hasAmbiLight;
     @PositiveOrZero
-    public Integer originalStock;
+    private Integer originalStock;
     @PositiveOrZero
-    public Integer sold;
+    private Integer sold;
 
 
     public Television() {}

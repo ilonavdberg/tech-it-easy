@@ -25,9 +25,7 @@ public class TelevisionMapper {
                 television.getHasVoiceControl(),
                 television.getHasHdr(),
                 television.getHasBluetooth(),
-                television.getHasAmbiLight(),
-                television.getOriginalStock(),
-                television.getSold()
+                television.getHasAmbiLight()
         );
     }
 

@@ -15,8 +15,6 @@ public record TelevisionResponseDto(
         Boolean hasVoiceControl,
         Boolean hasHdr,
         Boolean hasBluetooth,
-        Boolean hasAmbiLight,
-        Integer originalStock,
-        Integer sold
+        Boolean hasAmbiLight
 ) {
 }
