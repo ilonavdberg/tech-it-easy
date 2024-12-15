@@ -25,7 +25,7 @@ public class Television {
     @Check(constraints = "price >= 0.00")
     private BigDecimal price;
 
-    @Column(precision = 8, scale = 2, nullable = false)
+    @Column(precision = 8, nullable = false)
     private Double availableSize;
 
     @Column(precision = 4, nullable = false)
@@ -62,6 +62,10 @@ public class Television {
     @Column(precision = 8, nullable = false)
     @Check(constraints = "sold >= 0.00")
     private Integer sold;
+
+    @OneToOne
+    @JoinColumn(name = "remote_id", referencedColumnName = "id")
+    private Remote remote;
 
     public Television() {}
 

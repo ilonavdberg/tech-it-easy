@@ -3,6 +3,8 @@ package com.tech_it_easy.TechItEasy.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "wall_brackets")
 public class WallBracket {
@@ -21,7 +23,7 @@ public class WallBracket {
 
     @Column(precision = 8, scale = 2, nullable = false)
     @Check(constraints = "price >= 0.00")
-    private Double price;
+    private BigDecimal price;
 
     @Column(precision = 8, nullable = false)
     @Check(constraints = "originalStock >= 0.00")
@@ -46,7 +48,7 @@ public class WallBracket {
         return name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -66,7 +68,7 @@ public class WallBracket {
         this.name = name;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

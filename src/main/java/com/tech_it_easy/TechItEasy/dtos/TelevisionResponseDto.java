@@ -5,7 +5,7 @@ public record TelevisionResponseDto(
         String type,
         String brand,
         String name,
-        Double price,
+        java.math.BigDecimal price,
         Double availableSize,
         Integer refreshRate,
         String screenType,

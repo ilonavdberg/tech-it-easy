@@ -3,6 +3,8 @@ package com.tech_it_easy.TechItEasy.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Check;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "remote_controllers")
 public class Remote {
@@ -24,11 +26,14 @@ public class Remote {
 
     @Column(precision = 8, scale = 2, nullable = false)
     @Check(constraints = "price >= 0.00")
-    private Double price;
+    private BigDecimal price;
 
     @Column(precision = 8, nullable = false)
     @Check(constraints = "originalStock >= 0.00")
     private Integer originalStock;
+
+    @OneToOne (mappedBy = "remote")
+    private Television television;
 
     public Remote() {}
 
@@ -53,7 +58,7 @@ public class Remote {
         return brand;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -77,7 +82,7 @@ public class Remote {
         this.brand = brand;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
