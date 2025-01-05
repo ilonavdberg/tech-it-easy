@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.math.BigDecimal;
+
 public class TelevisionRequestDto {
     @NotBlank
     public String type;
@@ -12,7 +14,7 @@ public class TelevisionRequestDto {
     @NotBlank
     public String name;
     @PositiveOrZero
-    public Double price;
+    public BigDecimal price;
     @PositiveOrZero
     public Double availableSize;
     @PositiveOrZero
@@ -38,6 +40,7 @@ public class TelevisionRequestDto {
     @PositiveOrZero
     public Integer sold;
 
+    //Getters
     public @NotBlank String getType() {
         return type;
     }
@@ -50,7 +53,7 @@ public class TelevisionRequestDto {
         return name;
     }
 
-    public @PositiveOrZero Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
